@@ -11,12 +11,16 @@ import cn.zealon.readingcloud.common.enums.BookSerialStatusEnum;
 import cn.zealon.readingcloud.common.pojo.book.Book;
 import cn.zealon.readingcloud.common.result.Result;
 import cn.zealon.readingcloud.common.result.ResultUtil;
+import cn.zealon.readingcloud.common.vo.BookInitDto;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 图书服务
+ *
  * @author: tangyl
  * @since: 2019/7/4
  */
@@ -46,7 +50,7 @@ public class BookServiceImpl implements BookService {
     public Result<BookVO> getBookDetails(String bookId) {
         Book book = this.getBookById(bookId).getData();
         if (book == null) {
-            return ResultUtil.notFound().buildMessage("找不到"+bookId+"这本书哦！");
+            return ResultUtil.notFound().buildMessage("找不到" + bookId + "这本书哦！");
         }
 
         BookVO vo = new BookVO();
@@ -58,5 +62,16 @@ public class BookServiceImpl implements BookService {
         String serialStatusName = BookSerialStatusEnum.values()[book.getDicSerialStatus() - 1].getName();
         vo.setSerialStatusName(serialStatusName);
         return ResultUtil.success(vo);
+    }
+
+    /**
+     * 查询所图书信息
+     *
+     * @return
+     */
+    @Override
+    public Result<List<BookInitDto>> selectAllBook() {
+        List<BookInitDto> resBooks = bookMapper.selectAllBook();
+        return ResultUtil.success(resBooks);
     }
 }

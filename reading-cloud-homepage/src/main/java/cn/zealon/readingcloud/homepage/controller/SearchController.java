@@ -39,4 +39,12 @@ public class SearchController {
     public Result getHotSearchWordList(Integer size){
         return this.searchService.getHotSearchWordList(size);
     }
+
+    @ApiOperation(value = "初始化es数据", httpMethod = "GET")
+    @GetMapping("index/initEsData")
+    public Result initEsData(){
+        return this.searchService.initEsData();
+    }
+
+
 }

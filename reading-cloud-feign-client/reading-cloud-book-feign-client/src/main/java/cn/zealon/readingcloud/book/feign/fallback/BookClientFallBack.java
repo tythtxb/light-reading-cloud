@@ -4,10 +4,13 @@ import cn.zealon.readingcloud.book.feign.client.BookClient;
 import cn.zealon.readingcloud.common.pojo.book.Book;
 import cn.zealon.readingcloud.common.result.Result;
 import cn.zealon.readingcloud.common.result.ResultUtil;
+import cn.zealon.readingcloud.common.vo.BookInitDto;
 import feign.hystrix.FallbackFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * 图书客户端feign接口快速失败
@@ -26,6 +29,12 @@ public class BookClientFallBack implements FallbackFactory<BookClient> {
             @Override
             public Result<Book> getBookById(String bookId) {
                 LOGGER.error("获取图书[{}]失败：{}", bookId, cause.getMessage());
+                return ResultUtil.success(null);
+            }
+
+            @Override
+            public Result<List<BookInitDto>> selectAllBook() {
+                LOGGER.error("获取全部图书[{}]失败：{}", cause.getMessage());
                 return ResultUtil.success(null);
             }
         };

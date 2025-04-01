@@ -1,7 +1,11 @@
 package cn.zealon.readingcloud.book.service;
 
 import cn.zealon.readingcloud.book.vo.BookVO;
+import cn.zealon.readingcloud.common.pojo.book.Book;
 import cn.zealon.readingcloud.common.result.Result;
+import cn.zealon.readingcloud.common.vo.BookInitDto;
+
+import java.util.List;
 
 /**
  * 图书服务
@@ -23,4 +27,10 @@ public interface BookService {
      * @return
      */
     Result<BookVO> getBookDetails(String bookId);
+
+    /**
+     * 查询所有图书信息
+     * @return
+     */
+    Result<List<BookInitDto>> selectAllBook();
 }

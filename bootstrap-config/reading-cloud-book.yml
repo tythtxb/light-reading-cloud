@@ -8,9 +8,9 @@ spring:
   datasource:
     book-center:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://rm-m5e52b35wx8shto17125010.mysql.rds.aliyuncs.com:3306/reading_cloud_resource?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
-      username: reading_cloud
-      password: 'withyou2020'
+      url: jdbc:mysql://192.168.101.100:30006/reading_cloud_resource?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+      username: root
+      password: 'tanghuan'
       initial-size: 5
       min-idle: 5
       max-active: 30
@@ -22,8 +22,8 @@ spring:
   #---- redis配置  ----#
   redis:
     database: 0
-    host: localhost
-    port: 6379
+    host: 192.168.101.100
+    port: 32626
     password:
     jedis:
       pool:

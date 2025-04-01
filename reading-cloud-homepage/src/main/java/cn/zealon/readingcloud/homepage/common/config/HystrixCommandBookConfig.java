@@ -23,7 +23,7 @@ public class HystrixCommandBookConfig {
             .andCommandKey(HystrixCommandKey.Factory.asKey(BookClient.class.getSimpleName()))
             .andCommandPropertiesDefaults(
                 // 超时配置
-                HystrixCommandProperties.Setter().withExecutionTimeoutInMilliseconds(500)
+                HystrixCommandProperties.Setter().withExecutionTimeoutInMilliseconds(30000)
             )
             .andThreadPoolPropertiesDefaults(HystrixThreadPoolProperties.Setter()
                     .withAllowMaximumSizeToDivergeFromCoreSize(true)

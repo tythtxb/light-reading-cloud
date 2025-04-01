@@ -24,4 +24,10 @@ public interface SearchService {
      * @return
      */
     Result getSearchResultBooks(String keyword, Integer from, Integer size);
+
+    /**
+     * 查询数据库表数据，初始化es索引库数据
+     * @return
+     */
+    Result initEsData();
 }

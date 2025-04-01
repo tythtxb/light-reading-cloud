@@ -81,3 +81,11 @@ hystrix:
       coreSize: 20 #并发执行的最大线程数，默认10
       maxQueueSize: 1000 #BlockingQueue的最大队列数，默认值-1
       queueSizeRejectionThreshold: 400
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000  # 超时时间改为 30 秒

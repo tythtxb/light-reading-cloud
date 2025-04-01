@@ -24,6 +24,31 @@
         <result column="updater" jdbcType="VARCHAR" property="updater" />
     </resultMap>
 
+
+    <resultMap id="BaseResultMapInit" type="cn.zealon.readingcloud.common.vo.BookInitDto">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="author_id" jdbcType="INTEGER" property="authorId" />
+        <result column="dic_category" jdbcType="INTEGER" property="dicCategory" />
+        <result column="dic_channel" jdbcType="INTEGER" property="dicChannel" />
+        <result column="dic_serial_status" jdbcType="INTEGER" property="dicSerialStatus" />
+        <result column="online_status" jdbcType="BIT" property="onlineStatus" />
+        <result column="book_id" jdbcType="VARCHAR" property="bookId" />
+        <result column="book_name" jdbcType="VARCHAR" property="bookName" />
+        <result column="book_score" jdbcType="INTEGER" property="bookScore" />
+        <result column="key_word" jdbcType="VARCHAR" property="keyWord" />
+        <result column="img_url" jdbcType="VARCHAR" property="imgUrl" />
+        <result column="author_name" jdbcType="VARCHAR" property="authorName" />
+        <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+        <result column="isbn" jdbcType="VARCHAR" property="isbn" />
+        <result column="word_count" jdbcType="INTEGER" property="wordCount" />
+        <result column="creater" jdbcType="VARCHAR" property="creater" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="updater" jdbcType="VARCHAR" property="updater" />
+        <result column="author" jdbcType="VARCHAR" property="author" />
+        <result column="categoryName" jdbcType="VARCHAR" property="categoryName" />
+    </resultMap>
+
     <sql id="Base_Column_List">
       id, author_id, dic_category, dic_channel, dic_serial_status, online_status, book_id,
       book_name, book_score, key_word, img_url, author_name, introduction, isbn, word_count,
@@ -84,6 +109,17 @@
         select count(1)
         from book
         <include refid="findPageWithWhere" />
+    </select>
+    <select id="selectAllBook" resultMap="BaseResultMapInit">
+        SELECT
+            b.id, b.author_id, b.dic_category, b.dic_channel, b.dic_serial_status, b.online_status, b.book_id,
+            b.book_name, b.book_score, b.key_word, b.img_url, b.author_name, b.introduction, b.isbn, b.word_count,
+            b.creater, b.create_time, b.update_time, b.updater,
+            b.author_name AS author,
+            dd.NAME AS categoryName
+        FROM
+            `book` b
+                LEFT JOIN data_dictionary dd ON b.dic_category = dd.CODE
     </select>
 
 </mapper>

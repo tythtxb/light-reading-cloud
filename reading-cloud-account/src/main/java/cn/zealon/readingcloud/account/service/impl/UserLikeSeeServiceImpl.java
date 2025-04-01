@@ -35,7 +35,7 @@ public class UserLikeSeeServiceImpl implements UserLikeSeeService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserLikeSeeServiceImpl.class);
 
     @Autowired
-    private UserLikeSeeMapper likeSeeMapper;
+    private UserLikeSeeMapper userLikeSeeMapper;
 
     @Autowired
     private RedisService redisService;
@@ -51,12 +51,12 @@ public class UserLikeSeeServiceImpl implements UserLikeSeeService {
         try{
             // 0取消喜欢， 1增加喜欢
             if (0 == value) {
-                this.likeSeeMapper.deleteByUserIdAndBookId(userId, bookId);
+                this.userLikeSeeMapper.deleteByUserIdAndBookId(userId, bookId);
             } else {
                 UserLikeSee like = new UserLikeSee();
                 like.setUserId(userId);
                 like.setBookId(bookId);
-                this.likeSeeMapper.insert(like);
+                this.userLikeSeeMapper.insert(like);
             }
 
             // 更新缓存
@@ -73,7 +73,7 @@ public class UserLikeSeeServiceImpl implements UserLikeSeeService {
     public Result<Integer> getBookLikesCount(String bookId) {
         Integer likeCount = this.redisService.getHashVal(RedisAccountKey.ACCOUNT_CENTER_BOOK_LIKES_COUNT, bookId, Integer.class);
         if (likeCount == null) {
-            likeCount = this.likeSeeMapper.findPageWithCount(bookId);
+            likeCount = this.userLikeSeeMapper.findPageWithCount(bookId);
             this.redisService.setHashValExpire(RedisAccountKey.ACCOUNT_CENTER_BOOK_LIKES_COUNT, bookId, likeCount, RedisExpire.HOUR);
         }
         return ResultUtil.success(likeCount);
@@ -83,7 +83,7 @@ public class UserLikeSeeServiceImpl implements UserLikeSeeService {
     public Result getUserLikeBookList(Integer userId, Integer page, Integer limit) {
         try {
             PageHelper.startPage(page, limit);
-            Page<UserLikeSee> pageWithResult = (Page<UserLikeSee>) this.likeSeeMapper.findPageWithResult(userId);
+            Page<UserLikeSee> pageWithResult = (Page<UserLikeSee>) this.userLikeSeeMapper.findPageWithResult(userId);
             List<SimpleBookVO> books = new ArrayList<>();
             for (int i = 0; i < pageWithResult.size(); i++) {
                 SimpleBookVO vo = new SimpleBookVO();
@@ -105,7 +105,7 @@ public class UserLikeSeeServiceImpl implements UserLikeSeeService {
     public Result userLikeThisBook(Integer userId, String bookId) {
         int result = 0;
         try {
-            result = this.likeSeeMapper.selectCountByUserAndBookId(userId, bookId);
+            result = this.userLikeSeeMapper.selectCountByUserAndBookId(userId, bookId);
         } catch (Exception ex){
             LOGGER.error("查询喜欢此书异常：{}", ex);
         }

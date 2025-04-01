@@ -53,7 +53,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
         }
 
         String[] segments = path.split("/");
-        if (!whiteList.contains(segments[1])) {
+        if (!whiteList.contains(segments[2])) {
             // 认证
             String token = exchange.getRequest().getHeaders().getFirst("token");
             Result<User> result = JwtUtil.validationToken(token);

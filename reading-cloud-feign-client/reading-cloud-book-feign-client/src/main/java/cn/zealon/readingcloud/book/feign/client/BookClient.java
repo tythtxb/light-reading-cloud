@@ -3,9 +3,12 @@ package cn.zealon.readingcloud.book.feign.client;
 import cn.zealon.readingcloud.book.feign.fallback.BookClientFallBack;
 import cn.zealon.readingcloud.common.pojo.book.Book;
 import cn.zealon.readingcloud.common.result.Result;
+import cn.zealon.readingcloud.common.vo.BookInitDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * 图书客户端feign接口
@@ -19,4 +22,6 @@ public interface BookClient {
     @RequestMapping("/book/getBookById")
     Result<Book> getBookById(@RequestParam("bookId") String bookId);
 
+    @RequestMapping("/book/selectAllBook")
+    Result<List<BookInitDto>> selectAllBook();
 }

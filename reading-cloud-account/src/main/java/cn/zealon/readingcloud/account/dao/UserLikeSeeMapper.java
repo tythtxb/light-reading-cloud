@@ -1,6 +1,7 @@
 package cn.zealon.readingcloud.account.dao;
 
 import cn.zealon.readingcloud.common.pojo.account.UserLikeSee;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
  * @author: zealon
  * @since: 2020/4/14
  */
+@Mapper
 public interface UserLikeSeeMapper {
 
     int deleteByUserIdAndBookId(@Param("userId") Integer userId,

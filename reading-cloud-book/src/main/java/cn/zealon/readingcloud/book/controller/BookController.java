@@ -4,11 +4,14 @@ import cn.zealon.readingcloud.book.service.BookService;
 import cn.zealon.readingcloud.book.vo.BookVO;
 import cn.zealon.readingcloud.common.pojo.book.Book;
 import cn.zealon.readingcloud.common.result.Result;
+import cn.zealon.readingcloud.common.vo.BookInitDto;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 图书接口
@@ -31,6 +34,12 @@ public class BookController {
     @GetMapping("/getBookById")
     public Result<Book> getBookById(String bookId){
         return bookService.getBookById(bookId);
+    }
+
+    @ApiOperation(value = "查询所有图书信息", httpMethod = "GET")
+    @GetMapping("/selectAllBook")
+    public Result<List<BookInitDto>> selectAllBook(){
+        return bookService.selectAllBook();
     }
 
     @ApiOperation(value = "获取图书详情" , httpMethod = "GET")

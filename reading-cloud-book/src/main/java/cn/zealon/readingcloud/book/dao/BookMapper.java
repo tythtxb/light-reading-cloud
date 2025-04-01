@@ -1,6 +1,7 @@
 package cn.zealon.readingcloud.book.dao;
 
 import cn.zealon.readingcloud.common.pojo.book.Book;
+import cn.zealon.readingcloud.common.vo.BookInitDto;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -30,4 +31,6 @@ public interface BookMapper {
                               @Param("authorId") Integer authorId,
                               @Param("bookId") String bookId,
                               @Param("bookName") String bookName);
+
+    List<BookInitDto> selectAllBook();
 }
